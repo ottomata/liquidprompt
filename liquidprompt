@@ -709,6 +709,11 @@ _lp_git_branch_color()
 
     local branch
     branch=$(_lp_git_branch)
+    
+    local sha1
+    sha1=$(git rev-parse --short HEAD 2>/dev/null)
+    sha1=$(_lp_escape "$sha1")
+
     if [[ ! -z "$branch" ]] ; then
 
         local GD
@@ -761,16 +766,16 @@ _lp_git_branch_color()
             has_lines=$(git diff --numstat 2>/dev/null | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("+%d/-%d\n", plus, minus)}')
             if [[ "$has_commit" -gt "0" ]] ; then
                 # Changes to commit and commits to push
-                ret="${LP_COLOR_CHANGES}${branch}${NO_COL}(${LP_COLOR_DIFF}$has_lines${NO_COL},${LP_COLOR_COMMITS}$has_commit${NO_COL})${has_stash}${has_untracked}${NO_COL}"
+                ret="${LP_COLOR_CHANGES}(${branch}${NO_COL}${LP_COLOR_DIFF}$has_lines${LP_COLOR_CHANGES})${NO_COL},${LP_COLOR_COMMITS}$has_commit${NO_COL}${has_stash})${has_untracked}${NO_COL}${YELLOW}\[\033[0;33m\][${sha1}]"
             else
-                ret="${LP_COLOR_CHANGES}${branch}${NO_COL}(${LP_COLOR_DIFF}$has_lines${NO_COL})${has_stash}${has_untracked}${NO_COL}" # changes to commit
+                ret="${LP_COLOR_CHANGES}(${branch}${NO_COL}${LP_COLOR_DIFF}$has_lines${LP_COLOR_CHANGES})${NO_COL}${has_stash}${has_untracked}${NO_COL}\[\033[0;33m\][${sha1}]" # changes to commit
             fi
         else
             if [[ "$has_commit" -gt "0" ]] ; then
                 # some commit(s) to push
-                ret="${LP_COLOR_COMMITS}${branch}${NO_COL}(${LP_COLOR_COMMITS}$has_commit${NO_COL})${has_stash}${has_untracked}${NO_COL}"
+                ret="${LP_COLOR_COMMITS}(${branch}${NO_COL}${LP_COLOR_COMMITS}$has_commit)${NO_COL}${has_stash}${has_untracked}${NO_COL}\[\033[0;33m\][${sha1}]"
             else
-                ret="${LP_COLOR_UP}${branch}${has_stash}${has_untracked}${NO_COL}" # nothing to commit or push
+                ret="${LP_COLOR_UP}(${branch}${has_stash})${has_untracked}${NO_COL}\[\033[0;33m\][${sha1}]" # nothing to commit or push
             fi
         fi
         echo -ne "$ret"
