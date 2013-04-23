@@ -28,7 +28,7 @@ in a git repository on a server, at branch "myb":
 
 A liquid prompt displaying everything (a rare event!) may look like this:
 
-`code 🕤  ⌁24% ⌂42% 3d/2&/1z [user@server:~/ … /code/liquidprompt][pyenv]↥ master(+10/-5,3)*+ 125 ± `
+`code   ⌁24% ⌂42% 3d/2&/1z [user@server:~/ … /code/liquidprompt][pyenv]↥ master(+10/-5,3)*+ 125 ± `
 
 It (may) displays:
 
@@ -93,6 +93,14 @@ preferences. If you skip this step, the default behaviour will be used.
 
 Note that you should not overwrite the `PROMPT_COMMAND` variable, or else the
 prompt will not be available.
+
+### Quick Install - otto
+```bash
+git clone git://github.com/ottomata/liquidprompt.git ~/.liquidprompt && \
+  ln -s ~/.liquidprompt/liquidpromptrc-otto ~/.liquidpromptrc        && \
+  echo 'source $HOME/.liquidprompt/liquidprompt' >> ~/.bashrc        && \
+  bash
+```
 
 
 ## DEPENDENCIES
