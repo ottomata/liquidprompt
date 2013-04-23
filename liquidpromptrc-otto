@@ -119,12 +119,8 @@ LP_ENABLE_SSH_COLORS=1
 # will be disabled
 LP_DISABLED_VCS_PATH=""
 
-
-
+# Disable untracked file marker.
 LP_MARK_UNTRACKED=''
-LP_MARK_GIT=''
-
-
 
 
 # vim: set et sts=4 sw=4 tw=120 ft=sh:
