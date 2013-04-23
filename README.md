@@ -96,7 +96,7 @@ prompt will not be available.
 
 ### Quick Install - otto
 ```bash
-git clone git://github.com/ottomata/liquidprompt.git ~/.liquidprompt && \
+git clone https://github.com/ottomata/liquidprompt.git ~/.liquidprompt && \
   ln -s ~/.liquidprompt/liquidpromptrc-otto ~/.liquidpromptrc        && \
   echo 'source $HOME/.liquidprompt/liquidprompt' >> ~/.bashrc        && \
   bash
